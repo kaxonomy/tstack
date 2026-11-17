@@ -11,8 +11,8 @@ not.
 |---|---|---|
 | `full-send` | "full send" | Takes a change to a merged PR with nobody watching: proves it, reviews it, files it, babysits it, merges it. |
 | `full-stop` | "full stop" | Same as `full-send`, but stops when the PR is ready for you to merge. |
-| `council` | "council" | Gets review from three models from different providers, and loops until they agree. |
-| `sol-loop` | "sol loop" | Reviews a change with GPT Sol in a loop until both agents agree. |
+| `council` | "council" | Uses Fable 5.2 and GPT 6.2 Astra to judge changes made by GPT 6.2 Sol, and loops until both judges agree. |
+| `sol-loop` | "sol loop" | Reviews a change with GPT 6.2 Sol in a loop until both agents agree. |
 | `file-pr` | "file a PR" | Files a short PR that leads with the problem, not an inventory of changes. |
 | `takeover` | "take over" | Finishes someone else's PR, branch, or agent thread, and keeps their credit. |
 | `babysit-pr` | "babysit" | Watches a PR through CI and review bots, and fixes the real findings. |
@@ -38,15 +38,17 @@ cp -R tstack/skills/* ~/.codex/skills/    # Codex
 
 - An authenticated [GitHub CLI](https://cli.github.com) (`gh`).
 - `python3` for `babysit-pr`'s `pr-wait` script.
-- `council` and `sol-loop` need subagents on other providers' models. T3 Code
-  does this with `delegate_task`. Otherwise you need a harness that can run
-  those models.
+- `council` needs Fable 5.2 and GPT 6.2 Astra for judging and GPT 6.2 Sol
+  for implementation. `sol-loop` needs a GPT 6.2 Sol reviewer. T3 Code
+  supports cross-provider delegation with `delegate_task`. Otherwise use a
+  harness configured for the required models. Report any unavailable model
+  without substituting.
 
 ## Make them yours
 
-These are starting points. Edit them. Put personal settings, like which models
-sit on your council, in your `CLAUDE.md` or `AGENTS.md`, so you can update the
-skills without losing them.
+These are starting points. Edit them. Put personal settings, like review effort,
+in your `CLAUDE.md` or `AGENTS.md`, so you can update the skills without losing
+them.
 
 ## License
 

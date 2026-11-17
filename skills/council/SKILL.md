@@ -5,25 +5,25 @@ description: Trigger this if the user says 'council'.
 
 # Council
 
+Use GPT 6.2 Sol for all implementation changes, including fixes before the
+first audit and changes between rounds. If you already run GPT 6.2 Sol, make
+the changes directly. Otherwise, assign them to a GPT 6.2 Sol implementation
+delegate and wait for its work and checks before starting the judges.
+
 Before an audit, address outstanding PR comments, fix known issues, and run
-relevant checks. Give council the updated implementation; do not defer known
-fixes until reviews return. If the user wants to discard the implementation
-and explore new ideas, skip fixes to code being replaced.
+relevant checks. Give council the updated implementation. If the user wants
+to discard the implementation and explore new ideas, skip fixes to code
+being replaced.
 
-Bring in three delegates to help with the user's request, usually for review
-or feedback. Use one strong model from each of three different providers, at
-high reasoning effort. If the user's instructions name council members, use
-those. Otherwise pick the latest flagship model from each provider, for
-example Claude Opus, GPT Sol, and Gemini Pro.
+Use Fable 5.2 and GPT 6.2 Astra as the two read-only judges. Use high
+reasoning effort where supported. Give each judge the request and relevant
+context. Collect their findings, disagreements, and recommendations.
 
-In T3 Code, use `orchestrator_capabilities` to resolve the models, then
-`delegate_task` to start one delegate per model in parallel. Elsewhere, use
-the harness's subagent tools. If you cannot reach three providers, or a named
-member is unavailable, report it instead of substituting.
-
-Give each delegate the request and relevant context. For review or feedback,
-keep their work read-only. Collect their responses and summarize the useful
-findings, disagreements, and recommended next steps.
+In T3 Code, resolve the required models with `orchestrator_capabilities`.
+Use `delegate_task` to start one judge per model in parallel each round and
+to assign implementation when needed. Elsewhere, use the harness's subagent
+tools configured for these exact models. If a required model is unavailable,
+report the blocker. Do not guess model IDs or substitute another model.
 
 For a code review, ask each delegate for a score out of 10.
 Count each full review pass as one round.
@@ -39,18 +39,16 @@ Rounds: 2
 
 | Delegate | Round 1 | Round 2 |
 | --- | --- | --- |
-| Claude Opus | 7/10 | 9/10 |
-| GPT Sol | 8/10 | 10/10 |
-| Gemini Pro | 7/10 | 9/10 |
+| Fable 5.2 | 7/10 | 9/10 |
+| GPT 6.2 Astra | 8/10 | 10/10 |
 ```
 
 If a delegate gives no score, write `no score`. Do not invent one.
 If the PR is open, edit the description. Do not post a comment for this.
 If there is no PR, put the same results in the final reply only.
 
-If you agree with their recommendations, make the changes and request a fresh
-review after. Continue this process until all delegates are satisfied with the
-outcome.
+Use GPT 6.2 Sol to implement agreed fixes, then start a fresh round with both
+judges. Continue until both judges are satisfied with the outcome.
 
 Do not let repeated reviews result in scope creep. It is your job to fight to
 keep scope limited.
