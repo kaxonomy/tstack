@@ -25,6 +25,12 @@ to assign implementation when needed. Elsewhere, use the harness's subagent
 tools configured for these exact models. If a required model is unavailable,
 report the blocker. Do not guess model IDs or substitute another model.
 
+Do not wait idle. When a result arrives, check its findings against the code
+at once and decide what to fix while the other delegates run. Do not edit
+files while a delegate still reviews the same checkout. If the user's
+instructions mark a delegate as non-blocking, do not wait for it; treat a
+late result as feedback and do not record its score.
+
 For a code review, ask each delegate for a score out of 10.
 Count each full review pass as one round.
 A fresh review after fixes starts a new round.
@@ -43,12 +49,13 @@ Rounds: 2
 | GPT 6.2 Astra | 8/10 | 10/10 |
 ```
 
-If a delegate gives no score, write `no score`. Do not invent one.
+If a delegate returns a result for the round without a score, write `no score`.
+Do not invent one.
 If the PR is open, edit the description. Do not post a comment for this.
 If there is no PR, put the same results in the final reply only.
 
 Use GPT 6.2 Sol to implement agreed fixes, then start a fresh round with both
-judges. Continue until both judges are satisfied with the outcome.
+judges. Continue until all blocking judges are satisfied with the outcome.
 
 Do not let repeated reviews result in scope creep. It is your job to fight to
 keep scope limited.
