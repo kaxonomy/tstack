@@ -47,16 +47,18 @@ missing or pre-failing checks in the brief.
 
 In T3, call `orchestrator_capabilities`. Select Gemini 4 Neon specifically;
 do not pick the latest Gemini or a different version. Resolve its ID from the
-capabilities rather than guessing it. Record provider, model, and thought level
-only if exposed. Use `delegate_task` every round (`role: "review"`,
+capabilities rather than guessing it. Set its exposed thought or reasoning
+option to `high` in `target.options` and verify it before starting. High
+reasoning is required. Use `delegate_task` every round (`role: "review"`,
 `mode: "async"`). Save `taskId`. New `clientRequestId` per round.
-`childThreadId` is storage, not the next target. Do not use
-`t3_thread_send`, `create_threads`, or `t3_thread_launch` for review.
+`childThreadId` is storage, not the next target. Do not use `t3_thread_send`,
+`create_threads`, or `t3_thread_launch` for review.
 
 If T3 tools are not listed, try one direct capability call. Outside T3, use
-a native Gemini 4 Neon subagent and keep its ID. In Claude Code, use a custom
-subagent only if it is set up to run Gemini 4 Neon. If no route runs that exact
-model, report the blocker. Do not substitute a different model or version.
+a native Gemini 4 Neon subagent at high reasoning and keep its ID. In Claude
+Code, use a custom subagent only if it is set up to run Gemini 4 Neon at high
+reasoning. If no route runs that exact model at verified high reasoning,
+report the blocker. Do not lower reasoning or substitute another model.
 
 Do not edit scoped files while review runs. Wait for the notice. Do not
 poll or start a second reviewer. Timeout, error, or no reply is not
@@ -112,9 +114,8 @@ Do not push during the loop. Push after agreement only if the user asked
 to push, ship, or update the PR. If you push to a PR, add above the model
 blurb:
 
-`Reviewed with neon-loop: <N> rounds with <model>. Neon verdict: approved`.
-
-Add `on <thought_level>` only if verified.
+`Reviewed with neon-loop: <N> rounds with <model> on high reasoning. Neon verdict: approved`.
 
 Report: rounds, model, what Neon changed, diff size before/after, fixed and
-declined findings with reasons, usage if exposed (else say not), pushed or not.
+declined findings with reasons, verified high reasoning, usage if exposed
+(else say not), pushed or not.
