@@ -12,7 +12,7 @@ them to a GPT 6.2 Sol implementation delegate and wait for its work and checks
 before starting the judges.
 
 Before an audit, address outstanding PR comments, fix known issues, and run
-relevant checks. Give council the updated implementation. If the user wants
+relevant checks. Give the judges the updated implementation. If the user wants
 to discard the implementation and explore new ideas, skip fixes to code
 being replaced.
 

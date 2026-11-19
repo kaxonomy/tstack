@@ -11,7 +11,7 @@ not.
 |---|---|---|
 | `full-send` | "full send" | Takes a change to a merged PR with nobody watching: proves it, reviews it, files it, babysits it, merges it. |
 | `full-stop` | "full stop" | Same as `full-send`, but stops when the PR is ready for you to merge. |
-| `council` | "council" | Uses Fable 5.2, GPT 6.2 Astra, and Gemini 4 Neon to judge changes made by GPT 6.2 Sol, and loops until all judges agree. |
+| `council-fable` | "council fable" | Uses Fable 5.2, GPT 6.2 Astra, and Gemini 4 Neon to judge changes made by GPT 6.2 Sol, and loops until all judges agree. |
 | `council-opus` | "council opus" | Uses Claude Opus 5.5 instead of Fable 5.2 on the council. |
 | `sol-loop` | "sol loop" | Reviews a change with GPT 6.2 Sol in a loop until both agents agree. |
 | `neon-loop` | "neon loop" | Reviews a change with Gemini 4 Neon in a loop until both agents agree. |
@@ -40,7 +40,7 @@ cp -R tstack/skills/* ~/.codex/skills/    # Codex
 
 - An authenticated [GitHub CLI](https://cli.github.com) (`gh`).
 - `python3` for `babysit-pr`'s `pr-wait` script.
-- `council` needs Fable 5.2, GPT 6.2 Astra, and Gemini 4 Neon for judging and
+- `council-fable` needs Fable 5.2, GPT 6.2 Astra, and Gemini 4 Neon for judging and
   GPT 6.2 Sol for implementation. `council-opus` replaces Fable 5.2 with Claude
   Opus 5.5. `sol-loop` needs a GPT 6.2 Sol reviewer. `neon-loop` needs a Gemini
   4 Neon reviewer. Every model must run at high reasoning. T3 Code supports
