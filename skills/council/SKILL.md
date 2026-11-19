@@ -15,9 +15,9 @@ relevant checks. Give council the updated implementation. If the user wants
 to discard the implementation and explore new ideas, skip fixes to code
 being replaced.
 
-Use Fable 5.2 and GPT 6.2 Astra as the two read-only judges. Use high
-reasoning effort where supported. Give each judge the request and relevant
-context. Collect their findings, disagreements, and recommendations.
+Use Fable 5.2, GPT 6.2 Astra, and Gemini 4 Neon as the three read-only judges.
+Use high reasoning effort where supported. Give each judge the request and
+relevant context. Collect their findings, disagreements, and recommendations.
 
 In T3 Code, resolve the required models with `orchestrator_capabilities`.
 Use `delegate_task` to start one judge per model in parallel each round and
@@ -47,6 +47,7 @@ Rounds: 2
 | --- | --- | --- |
 | Fable 5.2 | 7/10 | 9/10 |
 | GPT 6.2 Astra | 8/10 | 10/10 |
+| Gemini 4 Neon | 8/10 | 10/10 |
 ```
 
 If a delegate returns a result for the round without a score, write `no score`.
